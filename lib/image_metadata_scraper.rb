@@ -3,13 +3,15 @@ require 'net/http'
 
 require 'image_metadata_scraper/version'
 require 'image_metadata_scraper/deviantart'
+require 'image_metadata_scraper/tumblr'
 
 module ImageMetadataScraper
   IMAGE_FILE_URL = /\Ahttps?:\/\/.*(.jpg|.jpeg|.png|.gif|.svg)/
 
   SCRAPERS = {
-    /\Ahttps?:\/\/.*deviantart.com\/.+/ => DeviantArt.method(:post),
-    /\Ahttps?:\/\/.*deviantart.net\/.+d.+/ => DeviantArt.method(:direct_link),
+    /\Ahttps?:\/\/.+deviantart\.com\/.+/ => DeviantArt.method(:post),
+    /\Ahttps?:\/\/.+deviantart\.net\/.+d.+/ => DeviantArt.method(:direct_link),
+    /\Ahttps?:\/\/.+tumblr\.com\/post\/.+/ => Tumblr.method(:post),
     IMAGE_FILE_URL => ->(url) { { image_url: url } }
   }.freeze
 

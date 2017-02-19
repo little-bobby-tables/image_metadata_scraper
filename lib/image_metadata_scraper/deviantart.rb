@@ -11,19 +11,17 @@ module ImageMetadataScraper
       page = Nokogiri::HTML(response.body)
 
       # Image file URL: downloads enabled
-      image_url = page.at('a.dev-page-download')&.attr('href')
-      image_url &&= _follow_download_url(image_url, response)
+      image_file_url = page.at('a.dev-page-download')&.attr('href')
+      image_file_url &&= _follow_download_url(image_file_url, response)
 
       # Image file URL: downloads disabled
-      image_url ||= page.at('.dev-view-deviation img.dev-content-full')&.attr('src')
+      image_file_url ||= page.at('.dev-view-deviation img.dev-content-full')&.attr('src')
 
-      # Artist name
-      artist = page.at('.dev-title-container .username').content
+      artist_name = page.at('.dev-title-container .username').content
 
-      # Canonical image page URL
-      image_page = page.at('meta[property="og:url"]')&.attr('content')
+      canonical_page_url = page.at('meta[property="og:url"]')&.attr('content')
 
-      { image_url: image_url, artist: artist, url: image_page }
+      { image_url: image_file_url, artist: artist_name, url: canonical_page_url }
     end
 
     def self.direct_link(url)
