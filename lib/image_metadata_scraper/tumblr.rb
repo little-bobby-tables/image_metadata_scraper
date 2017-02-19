@@ -12,11 +12,13 @@ module ImageMetadataScraper
 
       image_file_url = xml.at('//photo-url[@max-width="1280"]').content
 
+      thumbnail_url = xml.at('//photo-url[@max-width="500"]').content
+
       artist_name = xml.at('//tumblelog').attr('name')
 
       canonical_page_url = xml.at('//post').attr('url-with-slug')
 
-      { image_url: image_file_url, artist: artist_name, url: canonical_page_url }
+      { image_url: image_file_url, thumbnail_url: thumbnail_url, artist: artist_name, url: canonical_page_url }
     end
   end
 end

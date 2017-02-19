@@ -15,13 +15,15 @@ module ImageMetadataScraper
       image_file_url &&= _follow_download_url(image_file_url, response)
 
       # Image file URL: downloads disabled
-      image_file_url ||= page.at('.dev-view-deviation img.dev-content-full')&.attr('src')
+      image_file_url ||= page.at('.dev-view-deviation img.dev-content-full').attr('src')
+
+      thumbnail_url = page.at('.dev-view-deviation img.dev-content-normal').attr('src')
 
       artist_name = page.at('.dev-title-container .username').content
 
       canonical_page_url = page.at('meta[property="og:url"]')&.attr('content')
 
-      { image_url: image_file_url, artist: artist_name, url: canonical_page_url }
+      { image_url: image_file_url, thumbnail_url: thumbnail_url, artist: artist_name, url: canonical_page_url }
     end
 
     def self.direct_link(url)

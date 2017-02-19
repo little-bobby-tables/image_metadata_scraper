@@ -30,3 +30,9 @@ def scrape(url)
     yield ImageMetadataScraper.scrape(url)
   end
 end
+
+def assert_scraped(url, expected)
+  scrape(url) do |scraped|
+    assert_equal expected, scraped
+  end
+end

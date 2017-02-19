@@ -12,11 +12,12 @@ module ImageMetadataScraper
     /\Ahttps?:\/\/.+deviantart\.com\/.+/ => DeviantArt.method(:post),
     /\Ahttps?:\/\/.+deviantart\.net\/.+d.+/ => DeviantArt.method(:direct_link),
     /\Ahttps?:\/\/.+tumblr\.com\/post\/.+/ => Tumblr.method(:post),
-    IMAGE_FILE_URL => ->(url) { { image_url: url } }
+    IMAGE_FILE_URL => ->(url) { { image_url: url, thumbnail_url: url } }
   }.freeze
 
   # Returns a hash of scraped image metadata that always contains:
-  # +image_url+: URL to the largest available image file
+  # +image_url+:     URL to the largest available image file
+  # +thumbnail_url+: URL to a small version of the image
   #
   # and includes, if applicable,
   # +artist+:    the name of the artist (blogger)
