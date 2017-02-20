@@ -10,4 +10,14 @@ class TumblrScrapingTest < ActiveSupport::TestCase
                      url: 'http://iam-photography.tumblr.com/post/157409807702/crescent-over-the-flame'
                    }
   end
+
+  test 'post links without a slug' do
+    assert_scraped 'http://regnumsaturni.tumblr.com/post/155685354066',
+                   {
+                     image_url: 'http://68.media.tumblr.com/f4258a9dd1a3ed4e7122a8f7a5563095/tumblr_ojl0jzV49W1s0jbtpo1_1280.jpg',
+                     thumbnail_url: 'http://68.media.tumblr.com/f4258a9dd1a3ed4e7122a8f7a5563095/tumblr_ojl0jzV49W1s0jbtpo1_500.jpg',
+                     artist: 'regnumsaturni',
+                     url: 'http://regnumsaturni.tumblr.com/post/155685354066'
+                   }
+  end
 end

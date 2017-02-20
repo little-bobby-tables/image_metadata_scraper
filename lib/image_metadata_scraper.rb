@@ -28,7 +28,8 @@ module ImageMetadataScraper
     url = url.strip
     url = redirect_from(url)
 
-    SCRAPERS.detect { |regex, _| url =~ regex }.last.call(url) rescue nil
+    scraper = SCRAPERS.detect { |regex, _| url =~ regex }&.last
+    scraper.call(url) if scraper
   end
 
   def self.redirect_from(url)

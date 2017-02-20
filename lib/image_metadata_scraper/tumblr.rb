@@ -5,7 +5,7 @@ require 'open-uri'
 module ImageMetadataScraper
   module Tumblr
     def self.post(url)
-      api_url = url.match /\A(?<blog>https?:\/\/.*tumblr.com)\/post\/(?<post_id>\d+)\// do |m|
+      api_url = url.match /\A(?<blog>https?:\/\/.*tumblr.com)\/post\/(?<post_id>\d+)/ do |m|
         "#{m[:blog]}/api/read?id=#{m[:post_id]}"
       end
       xml = Nokogiri::XML(open(api_url))
