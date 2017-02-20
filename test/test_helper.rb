@@ -33,6 +33,10 @@ end
 
 def assert_scraped(url, expected)
   scrape(url) do |scraped|
-    assert_equal expected, scraped
+    if expected.nil?
+      assert_nil scraped
+    else
+      assert_equal expected, scraped
+    end
   end
 end

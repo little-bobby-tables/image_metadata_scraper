@@ -6,7 +6,7 @@ require 'image_metadata_scraper/deviantart'
 require 'image_metadata_scraper/tumblr'
 
 module ImageMetadataScraper
-  IMAGE_FILE_URL = /\Ahttps?:\/\/.*(.jpg|.jpeg|.png|.gif|.svg)/
+  IMAGE_FILE_URL = /\Ahttps?:\/\/.*\.(jpg|jpeg|png|gif|svg)/
 
   SCRAPERS = {
     /\Ahttps?:\/\/.+deviantart\.com\/.+/ => DeviantArt.method(:post),
@@ -22,11 +22,13 @@ module ImageMetadataScraper
   # and includes, if applicable,
   # +artist+:    the name of the artist (blogger)
   # +url+:       canonical URL to the image page (e.g. DeviantArt post)
+  #
+  # Returns nil if scraping fails.
   def self.scrape(url)
     url = url.strip
     url = redirect_from(url)
 
-    SCRAPERS.detect { |regex, _| url =~ regex }.last.call(url)
+    SCRAPERS.detect { |regex, _| url =~ regex }.last.call(url) rescue nil
   end
 
   def self.redirect_from(url)
