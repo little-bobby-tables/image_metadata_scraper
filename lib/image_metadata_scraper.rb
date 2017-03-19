@@ -11,7 +11,7 @@ module ImageMetadataScraper
   SCRAPERS = {
     /\Ahttps?:\/\/.+deviantart\.com\/.+/ => DeviantArt.method(:post),
     /\Ahttps?:\/\/.+deviantart\.net\/.+d.+/ => DeviantArt.method(:direct_link),
-    /\Ahttps?:\/\/.+tumblr\.com\/post\/.+/ => Tumblr.method(:post),
+    /\Ahttps?:\/\/.+tumblr\.com\/(post|image)\/.+/ => Tumblr.method(:post),
     IMAGE_FILE_URL => ->(url) { { image_url: url, thumbnail_url: url } }
   }.freeze
 
