@@ -12,7 +12,7 @@ class DeviantArtScrapingTest < ActiveSupport::TestCase
   end
 
   test 'posts with downloading disabled' do
-    assert_scraped 'http://oo-rein-oo.deviantart.com/art/Heart-Of-The-City-303912988?some-unrelated-parameter=5',
+    assert_scraped 'oo-rein-oo.deviantart.com/art/Heart-Of-The-City-303912988?some-unrelated-parameter=5',
                    {
                      image_url: 'http://orig02.deviantart.net/b72b/f/2012/144/e/1/e18e380d65641c6e57a6545b33b7a6de-d50xwrg.jpg',
                      thumbnail_url: 'http://orig02.deviantart.net/b72b/f/2012/144/e/1/e18e380d65641c6e57a6545b33b7a6de-d50xwrg.jpg',

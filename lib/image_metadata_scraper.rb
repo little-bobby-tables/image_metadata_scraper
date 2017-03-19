@@ -25,11 +25,11 @@ module ImageMetadataScraper
   #
   # Returns nil if scraping fails.
   def self.scrape(url)
-    url = url.strip
+    url = http_url(url) or return
     url = redirect_from(url)
 
-    scraper = SCRAPERS.detect { |regex, _| url =~ regex }&.last
-    scraper.call(url) if scraper
+    scraper = SCRAPERS.detect { |regex, _| url =~ regex }&.last or return
+    scraper.call(url)
   end
 
   def self.redirect_from(url)
@@ -37,6 +37,19 @@ module ImageMetadataScraper
     case response.code when '301', '302'
       response.header['location']
     else
+      url
+    end
+  end
+
+  def self.http_url(url)
+    return if url.blank?
+
+    url = url.strip
+    scheme = url.match(/\A.+:\/\//)
+
+    if scheme.nil?
+      "http://#{url}"
+    elsif scheme.to_s == 'http://' || scheme.to_s == 'https://'
       url
     end
   end
