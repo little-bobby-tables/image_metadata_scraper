@@ -1,5 +1,9 @@
 # ImageMetadataScraper
 
+[![Build Status](https://travis-ci.org/little-bobby-tables/image_metadata_scraper.svg?branch=master)](https://travis-ci.org/little-bobby-tables/image_metadata_scraper)
+[![Test Coverage](https://codeclimate.com/github/little-bobby-tables/image_metadata_scraper/badges/coverage.svg)](https://codeclimate.com/github/little-bobby-tables/image_metadata_scraper/coverage)
+[![Gem Version](https://badge.fury.io/rb/image_metadata_scraper.svg)](https://badge.fury.io/rb/image_metadata_scraper)
+
 ```ruby
 require 'image_metadata_scraper'
 ImageMetadataScraper.scrape 'http://fav.me/shorturl'
